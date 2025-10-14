@@ -1,22 +1,34 @@
-from time import sleep
 
-from views.login import LoginPage
+import time
 
+from selenium import webdriver
 
-URL = "https://ai-quizwhiz.zluck.com/login"
+def test_login_with_valid_admin():
+    driver = webdriver.Chrome()  # 1. Open the Google Chrome
 
+    driver.get("https://ai-quizwhiz.zluck.com/login")
+    elem_username_input = driver.find_element("xpath","/html/body/div[3]/div/main/div/div[2]/div[2]/div/form/div[1]/div[1]/div/div/div[2]/div/div/input")
+    elem_username_input.clear()
+    elem_username_input.send_keys("admin@gmail.com")
 
-def test_login(driver):
-    # Initialize Page Objects
-    login_page = LoginPage(driver)
+    # getting password
+    elem_pass_input = driver.find_element("xpath", "/html/body/div[3]/div/main/div/div[2]/div[2]/div/form/div[1]/div[2]/div/div/div[2]/div/div[1]/input")
+    elem_pass_input.clear()
+    elem_pass_input.send_keys("123456")
 
-    # Open Webpage
-    driver.get(URL)
+    # click submit button
+    elem_btn_login = driver.find_element("xpath", "/html/body/div[3]/div/main/div/div[2]/div[2]/div/form/div[2]/div/button")
+    elem_btn_login.click()
 
-    # Login
-    username = "admin@gmail.com"
-    password = "123456"
-    login_page.login(username, password)
-    sleep(5)
+    driver.implicitly_wait(3)
 
-    login_page.verify_login()  # Verify Login Page
+    # click users button / left manu button
+    elem_btn_users = driver.find_element("xpath", "/html/body/div[1]/aside/nav/ul/li/ul/li[2]/a")
+    elem_btn_users.click()
+
+    driver.implicitly_wait(3)
+
+    elem_btn_new_users = driver.find_element("xpath", "/html/body/div[1]/div[1]/main/div/section/header/div[2]/div")
+    assert (elem_btn_new_users.is_displayed() == True)
+
+    time.sleep(10)
