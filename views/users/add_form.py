@@ -41,7 +41,7 @@ class AddForm:
         sleep(1)
 
     def upload_image(self):
-        upload_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "abc.png"))
+        upload_file = os.path.abspath(os.path.join(os.path.dirname(__file__), "../..", "abc.png"))
 
 
 
@@ -49,6 +49,18 @@ class AddForm:
         file_input.send_keys(upload_file)
         sleep(10)
 
-    def click_add_user_button(self):
-        self.driver.find_element(By.XPATH, "/html/body/div[1]/div[1]/main/div/section/header/div[2]/div/a").click()
+    def enter_name_input(self, name):
+        self.driver.find_element(By.XPATH, "/html/body/div[1]/div[1]/main/div/section/div/div/form/div[1]/div/section/div/div/div/div[1]/div/div/div[2]/div/div/input").send_keys(name)
+        sleep(1)
+
+    def enter_email_input(self, email):
+        self.driver.find_element(By.ID, "data.email").send_keys(email)
+        sleep(1)
+
+    def enter_password_input(self, password):
+        self.driver.find_element(By.ID, "data.password").send_keys(password)
+        sleep(1)
+
+    def enter_confirm_password_input(self, password_confirmation):
+        self.driver.find_element(By.ID, "data.password_confirmation").send_keys(password_confirmation)
         sleep(1)

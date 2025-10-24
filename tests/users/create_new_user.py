@@ -6,6 +6,8 @@ from selenium import webdriver
 def test_login_with_valid_admin():
     driver = webdriver.Chrome()  # 1. Open the Google Chrome
 
+    driver.maximize_window()
+
     driver.get("https://ai-quizwhiz.zluck.com/login")
     elem_username_input = driver.find_element("xpath","/html/body/div[3]/div/main/div/div[2]/div[2]/div/form/div[1]/div[1]/div/div/div[2]/div/div/input")
     elem_username_input.clear()
@@ -33,7 +35,7 @@ def test_login_with_valid_admin():
     assert (elem_btn_new_users.is_displayed() == True)
 
     # input name
-    elem_name = driver.find_element("xpath","/html/body/div[1]/div[1]/main/div/section/div/div/form/div[1]/div/section/div/div/div/div[1]/div/div/div[2]/div/div/input")
+    elem_name = driver.find_element("id","data.name")
     elem_name.send_keys("Md.Zafor")
 
     # input email
